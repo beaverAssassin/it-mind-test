@@ -1,0 +1,18 @@
+{
+  "name": "it-mind-node-server",
+  "version": "1.0.0",
+  "description": "Simple node.js HTTP server with TypeScript",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon src/index.ts "
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "@types/pg": "^8.11.3",
+    "nodemon": "^3.1.0",
+    "pg": "^8.7.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.4",
+    "dotenv": "^16.4.5"
+  }
+}
