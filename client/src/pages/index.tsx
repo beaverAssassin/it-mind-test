@@ -3,14 +3,14 @@ import List from '@/app/components/List/List';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Roboto } from 'next/font/google';
-import { Item } from '@/pages/index.types';
+import { Item } from '@/index.types';
 
 const roboto = Roboto({
   weight: '400',
   subsets: ['latin'],
 });
 
-export const getServerSideProps = (async ({ query }) => {
+const getServerSideProps = (async ({ query }) => {
   const request = !query.mode ? 'countries' : query.mode;
   const res = await fetch(`http://localhost:3001/${request}`);
   const data = await res.json();

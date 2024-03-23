@@ -1,8 +1,8 @@
 import React from 'react';
 import ListItem from '@/app/components/ListItem/ListItem';
-import styles from './List.module.scss';
 import { useRouter } from 'next/router';
-import { Item } from '@/pages/index.types';
+import { Item } from '@/index.types';
+import styles from './List.module.scss';
 
 interface ListProps {
   data: Item[];
