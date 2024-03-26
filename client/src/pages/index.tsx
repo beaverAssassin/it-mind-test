@@ -1,10 +1,8 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import List from '@/app/components/List/List';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Item } from '@/index.types';
 import { fetchUrl } from '@/api';
-import { COUNTRIES, CURRENCIES } from '@/constants';
+import { COUNTRIES } from '@/constants';
 import '../app/globals.css';
 
 export const getServerSideProps = (async ({ query }) => {
