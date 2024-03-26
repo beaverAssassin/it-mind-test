@@ -1,8 +1,8 @@
 
   .listItem {
+    margin-top: 10px;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     border-radius: 2px;
     padding: 10px 20px;
     background: whitesmoke;
@@ -10,9 +10,18 @@
     display: flex;
     user-select: none;
 
+    .checkboxWrapper {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .label, .checkbox {
+      cursor: pointer;
+    }
+
     .items {
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
       max-width: 500px;
       overflow-x: auto;
       display: flex;

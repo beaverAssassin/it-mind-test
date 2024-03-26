@@ -4,7 +4,7 @@
   "description": "Simple node.js HTTP server with TypeScript",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon src/index.ts "
+    "start": "nodemon src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^16.0.0",

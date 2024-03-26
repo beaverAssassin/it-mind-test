@@ -4,8 +4,8 @@ import * as http from 'http';
 import {
     handleCountriesRequest,
     handleCurrenciesRequest,
-    setActiveCountry,
-    setActiveCurrency,
+    handleActiveCountryRequest,
+    handleActiveCurrencyRequest,
 } from './utils';
 import 'dotenv/config'
 
@@ -15,6 +15,7 @@ const dbConfig = {
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    ssl: true
 };
 
 export const client = new Client(dbConfig as any);
@@ -40,10 +41,10 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
             handleCurrenciesRequest(res);
             break;
         case req.url?.startsWith('/set-active-countries'):
-            setActiveCountry(res, id, active);
+            handleActiveCountryRequest(res, id, active);
             break;
         case req.url?.startsWith('/set-active-currencies'):
-            setActiveCurrency(res, id, active);
+            handleActiveCurrencyRequest(res, id, active);
             break;
         default:
             res.writeHead(404);
@@ -52,7 +53,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

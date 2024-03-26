@@ -10,6 +10,7 @@ const getRequiredErrorMessage = (res: ServerResponse, id: string, active: boolea
 }
 
 const get500ErrorMessage = (res: ServerResponse) => {
+
   res.writeHead(500);
   res.end(JSON.stringify({ error: 'Internal Server Error' }));
 }
@@ -21,7 +22,7 @@ const getSuccessMessage = (res: ServerResponse, id) => {
 }
 
 export const handleCountriesRequest = (res: ServerResponse) => {
-  client.query('SELECT * FROM iso4217 ORDER BY country', (error, results) => {
+  client.query('SELECT country, currency_code, active_country FROM iso4217 ORDER BY country ASC, currency_code ASC', (error, results) => {
     if (error) {
       get500ErrorMessage(res)
     } else {
@@ -37,9 +38,12 @@ export const handleCountriesRequest = (res: ServerResponse) => {
           };
           result.push(uniqueCountries[item.country]);
         } else {
-          uniqueCountries[item.country].items.push(item.currency_code);
+          uniqueCountries[item.country].items.push(item.currency_code)
         }
+        uniqueCountries[item.country].items.sort();
+
       });
+
       res.writeHead(200);
       res.end(JSON.stringify(result));
     }
@@ -47,7 +51,7 @@ export const handleCountriesRequest = (res: ServerResponse) => {
 };
 
 export const handleCurrenciesRequest = (res: ServerResponse) => {
-  client.query('SELECT * FROM iso4217 ORDER BY currency_code', (error, results) => {
+  client.query('SELECT * FROM iso4217 ORDER BY currency_code ASC, country ASC', (error, results) => {
     if (error) {
       get500ErrorMessage(res)
     } else {
@@ -72,14 +76,13 @@ export const handleCurrenciesRequest = (res: ServerResponse) => {
   });
 };
 
-export const setActiveCountry = (res: ServerResponse, id: string, active: boolean) => {
+export const handleActiveCountryRequest = (res: ServerResponse, id: string, active: boolean) => {
   getRequiredErrorMessage(res,id,active)
 
   const query = {
     text: 'UPDATE iso4217 SET active_country = $1 WHERE country = $2',
     values: [active, id],
   };
-
 
   // @ts-ignore
   client.query(query, (error) => {
@@ -91,7 +94,7 @@ export const setActiveCountry = (res: ServerResponse, id: string, active: boolea
   });
 };
 
-export const setActiveCurrency = (res: ServerResponse, id: string, active: boolean) => {
+export const handleActiveCurrencyRequest = (res: ServerResponse, id: string, active: boolean) => {
   getRequiredErrorMessage(res,id,active)
 
   const query = {
@@ -101,7 +104,6 @@ export const setActiveCurrency = (res: ServerResponse, id: string, active: boole
 
   // @ts-ignore
   client.query(query, (error, results) => {
-    console.log(results);
     if (error) {
       get500ErrorMessage(res)
     } else {

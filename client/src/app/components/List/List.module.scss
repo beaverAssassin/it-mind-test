@@ -1,38 +1,17 @@
 .countryList {
-  /*padding: 15px;*/
 
-
-  .listItem {
-    cursor: pointer;
-    border-radius: 2px;
-    padding: 20px;
-    background: whitesmoke;
-    margin-bottom: 10px;
-    display: flex;
-    user-select: none;
-
-    &:hover {
-      background: floralwhite;
-    }
-
-    //&:active {
-    // background-color: grey;
-    //}
-
-    .country {
-      font-weight: bold;
-      min-width: 300px;
-    }
-
-    .currencies {
-      display: flex;
-      gap: 15px;
-    }
-
-    .symbol {
-      margin-left: 2px;
-      color: green;
-      //font-size: 10px;
-    }
+  h2 {
+    text-align: center;
+    margin: 10px 0;
   }
+
+  .button {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: none;
+    display: block;
+    margin: 0 auto;
+  }
+
 }
