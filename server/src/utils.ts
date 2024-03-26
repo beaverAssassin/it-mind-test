@@ -1,5 +1,6 @@
 import { ServerResponse } from 'http';
 import { client } from './index';
+import { QueryConfig } from 'pg';
 
 const getRequiredErrorMessage = (res: ServerResponse, id: string, active: boolean) => {
   if (!id || active === undefined) {
@@ -84,8 +85,7 @@ export const handleActiveCountryRequest = (res: ServerResponse, id: string, acti
     values: [active, id],
   };
 
-  // @ts-ignore
-  client.query(query, (error) => {
+  client.query(query as QueryConfig, (error) => {
     if (error) {
       get500ErrorMessage(res)
     } else {
@@ -102,8 +102,7 @@ export const handleActiveCurrencyRequest = (res: ServerResponse, id: string, act
     values: [active, id],
   };
 
-  // @ts-ignore
-  client.query(query, (error, results) => {
+  client.query(query as QueryConfig, (error, results) => {
     if (error) {
       get500ErrorMessage(res)
     } else {

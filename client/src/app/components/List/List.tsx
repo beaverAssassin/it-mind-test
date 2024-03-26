@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ListItem from '@/app/components/ListItem/ListItem';
 import { useRouter } from 'next/router';
 import { Item } from '@/index.types';
@@ -21,12 +21,11 @@ const List: React.FC<ListProps> = ({ data = [] }) => {
     switchMode(targetMode);
   };
 
-  const toggleActiveItem = async (id: string, active: boolean) => {
-    await fetchUrl(
+  const toggleActiveItem = useCallback(async (id: string, active: boolean) => {
+    return await fetchUrl(
       `http://localhost:3001/set-active-${mode}?id=${id}&active=${!active}`,
     );
-    router.replace(router.asPath, undefined, { scroll: false });
-  };
+  }, []);
 
   return (
     <div className={styles.countryList}>

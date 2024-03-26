@@ -1,15 +1,23 @@
-import { FC } from 'react';
+import { FC, memo, useState } from 'react';
 import { Item } from '@/index.types';
 import styles from './ListItem.module.scss';
 
 interface ItemProps {
   item: Item;
-  toggleActiveItem: (id: string, active: boolean) => void;
+  toggleActiveItem: (id: string, active: boolean) => Promise<void>;
 }
 const ListItem: FC<ItemProps> = ({
   item: { title, active, items },
   toggleActiveItem,
 }) => {
+  const [checked, setIsChecked] = useState(active);
+
+  const handleChange = () => {
+    toggleActiveItem(title, active).then(() => {
+      return setIsChecked((prev) => !prev);
+    });
+  };
+
   return (
     <div className={styles.listItem} key={title}>
       <div className={styles.checkboxWrapper}>
@@ -17,8 +25,8 @@ const ListItem: FC<ItemProps> = ({
           className={styles.checkbox}
           id={title}
           type="checkbox"
-          checked={active}
-          onChange={() => toggleActiveItem(title, active)}
+          checked={checked}
+          onChange={handleChange}
         />
         <label htmlFor={title} className={styles.label}>
           <span className={active ? styles.active : ''}>{title}</span>
@@ -37,4 +45,4 @@ const ListItem: FC<ItemProps> = ({
   );
 };
 
-export default ListItem;
+export default memo(ListItem);
