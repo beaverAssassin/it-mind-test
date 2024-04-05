@@ -10,20 +10,35 @@ import {
 import 'dotenv/config'
 
 const dbConfig = {
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    ssl: true
+    user: 'postgres',
+    host: 'db',
+    database: 'postgres',
+    password: 'postgres',
+    port: 5432,
+    // ssl: true
 };
 
 export const client = new Client(dbConfig as any);
 
+const query = {
+    text: `CREATE TABLE iso4217 (
+    country VARCHAR(255),
+    currency VARCHAR(255),
+    currency_code VARCHAR(255),
+    active_country BOOLEAN,
+    active_currency BOOLEAN
+)`}
+
 client.connect((error) => {
     if (error) {
+        console.error(dbConfig)
         console.error('Database connection error:', error);
     } else {
+        client.query(query,(error) => {
+              if (error) {
+                  console.error(error)
+              }
+          })
         console.log('Database connected successfully');
     }
 });
@@ -53,7 +68,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     }
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

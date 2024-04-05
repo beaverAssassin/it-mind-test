@@ -1,3 +1,5 @@
+export const apiUrl = 'http://server:4000';
+
 export const fetchUrl = async (url: string) => {
   try {
     const response = await fetch(url);

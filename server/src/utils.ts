@@ -25,6 +25,7 @@ const getSuccessMessage = (res: ServerResponse, id) => {
 export const handleCountriesRequest = (res: ServerResponse) => {
   client.query('SELECT country, currency_code, active_country FROM iso4217 ORDER BY country ASC, currency_code ASC', (error, results) => {
     if (error) {
+      console.error(error)
       get500ErrorMessage(res)
     } else {
       const uniqueCountries = {};
