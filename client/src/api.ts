@@ -1,8 +1,9 @@
+
 export const apiUrl = 'http://server:4000';
 
-export const fetchUrl = async (url: string) => {
+export const fetchUrl = async (url: string, params?: RequestInit) => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, params);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

@@ -17,7 +17,7 @@ const ListItem: FC<ItemProps> = ({
       return setIsChecked((prev) => !prev);
     });
   };
-
+  console.log(items);
   return (
     <div className={styles.listItem} key={title}>
       <div className={styles.checkboxWrapper}>

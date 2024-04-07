@@ -4,15 +4,23 @@
   "description": "Simple node.js HTTP server with TypeScript",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon src/index.ts"
+    "start": "nest start"
   },
   "devDependencies": {
+    "@nestjs/cli": "^10.3.2",
     "@types/node": "^16.0.0",
     "@types/pg": "^8.11.3",
-    "nodemon": "^3.1.0",
+    "dotenv": "^16.4.5",
     "pg": "^8.7.1",
+    "prisma": "^5.12.1",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.4",
-    "dotenv": "^16.4.5"
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.3.7",
+    "@nestjs/core": "10.3.2",
+    "@nestjs/platform-express": "10.3.2",
+    "@prisma/client": "^5.12.1",
+    "save": "^2.9.0"
   }
 }

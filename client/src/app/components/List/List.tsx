@@ -22,9 +22,13 @@ const List: React.FC<ListProps> = ({ data = [] }) => {
   };
 
   const toggleActiveItem = useCallback(async (id: string, active: boolean) => {
-    return await fetchUrl(
-      `http://localhost:4000/set-active-${mode}?id=${id}&active=${!active}`,
-    );
+    return fetchUrl(`http://localhost:3003/set-active-${mode}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ item: id, active: !active }),
+    });
   }, []);
 
   return (

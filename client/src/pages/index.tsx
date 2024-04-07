@@ -6,7 +6,7 @@ import { COUNTRIES } from '@/constants';
 import '../app/globals.css';
 export const getServerSideProps = (async ({ query }) => {
   const request = !query.mode ? COUNTRIES : query.mode;
-  const data = await fetchUrl(`${apiUrl}/${request}`);
+  const data = await fetchUrl(`http://localhost:3003/${request}`);
 
   return { props: { data } };
 }) satisfies GetServerSideProps<{ data: Item[] }>;
